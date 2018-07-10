@@ -5,14 +5,15 @@ def _get_values(*args):
     for arg in args:
         if isinstance(arg, bool):
             continue
-        if isinstance(arg, (list, tuple, set)):
+        elif isinstance(arg, (list, tuple)):
             values.extend(_get_values(*arg))
             continue
-        if arg is None:
+        elif arg is None:
             continue
-        value = str(arg).strip()
-        if value:
-            values.append(value)
+        elif isinstance(arg, (str, int, float)):
+            value = str(arg).strip()
+            if value:
+                values.append(value)
     return values
 
 

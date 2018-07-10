@@ -9,11 +9,11 @@ class ClassNamesStringsTestCase(TestCase):
         names = class_names('foo', 'bar')
         self.assertEqual(names, 'foo bar')
 
-    def test_removes_empty_spaces(self):
+    def test_ignores_empty_spaces(self):
         names = class_names('  foo  ', '   bar  ')
         self.assertEqual(names, 'foo bar')
 
-    def test_removes_empty(self):
+    def test_ignores_empty(self):
         names = class_names('', 'bar')
         self.assertEqual(names, 'bar')
 
@@ -39,18 +39,18 @@ class ClassNamesNumberTestCase(TestCase):
 
 class ClassNamesBoolTestCase(TestCase):
 
-    def test_removes_true(self):
+    def test_ignores_true(self):
         names = class_names('foo', True)
         self.assertEqual(names, 'foo')
 
-    def test_removes_false(self):
+    def test_ignores_false(self):
         names = class_names('foo', False)
         self.assertEqual(names, 'foo')
 
 
 class ClassNamesNoneTestCase(TestCase):
 
-    def test_removes_none(self):
+    def test_ignores_none(self):
         names = class_names('foo', None)
         self.assertEqual(names, 'foo')
 
@@ -61,7 +61,7 @@ class ClassNamesListTestCase(TestCase):
         names = class_names('foo', ['bar', 'foobar'])
         self.assertEqual(names, 'foo bar foobar')
 
-    def test_removes_empty(self):
+    def test_ignores_empty(self):
         names = class_names('foo', [], 'bar')
         self.assertEqual(names, 'foo bar')
 
@@ -73,6 +73,6 @@ class ClassNamesListTestCase(TestCase):
         names = class_names('foo', ('bar', ['second', 'deep'], 'foobar'))
         self.assertEqual(names, 'foo bar second deep foobar')
 
-    def test_set(self):
+    def test_ignores_set(self):
         names = class_names('foo', ('bar', set(['second', 'deep']), 'foobar'))
-        self.assertEqual(names, 'foo bar second deep foobar')
+        self.assertEqual(names, 'foo bar foobar')
