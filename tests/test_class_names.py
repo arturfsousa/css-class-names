@@ -76,3 +76,22 @@ class ClassNamesListTestCase(TestCase):
     def test_ignores_set(self):
         names = class_names('foo', ('bar', set(['second', 'deep']), 'foobar'))
         self.assertEqual(names, 'foo bar foobar')
+
+
+class ClassNamesDictTestCase(TestCase):
+
+    def test_simple(self):
+        names = class_names('foo', {'bar': True})
+        self.assertEqual(names, 'foo bar')
+
+    def test_ingnores_falsy_false(self):
+        names = class_names('foo', {'bar': False})
+        self.assertEqual(names, 'foo')
+
+    def test_ingnores_falsy_none(self):
+        names = class_names('foo', {'bar': None})
+        self.assertEqual(names, 'foo')
+
+    def test_ingnores_falsy_0(self):
+        names = class_names('foo', {'bar': 0})
+        self.assertEqual(names, 'foo')

@@ -10,6 +10,10 @@ def _get_values(*args):
             continue
         elif arg is None:
             continue
+        if isinstance(arg, dict):
+            dict_args = [k for k, v in arg.items() if v]
+            values.extend(_get_values(*dict_args))
+            continue
         elif isinstance(arg, (str, int, float)):
             value = str(arg).strip()
             if value:
