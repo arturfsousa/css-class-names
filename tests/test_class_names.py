@@ -53,3 +53,26 @@ class ClassNamesNoneTestCase(TestCase):
     def test_removes_none(self):
         names = class_names('foo', None)
         self.assertEqual(names, 'foo')
+
+
+class ClassNamesListTestCase(TestCase):
+
+    def test_simple(self):
+        names = class_names('foo', ['bar', 'foobar'])
+        self.assertEqual(names, 'foo bar foobar')
+
+    def test_removes_empty(self):
+        names = class_names('foo', [], 'bar')
+        self.assertEqual(names, 'foo bar')
+
+    def test_deep(self):
+        names = class_names('foo', ['bar', ['second', 'deep'], 'foobar'])
+        self.assertEqual(names, 'foo bar second deep foobar')
+
+    def test_tuple(self):
+        names = class_names('foo', ('bar', ['second', 'deep'], 'foobar'))
+        self.assertEqual(names, 'foo bar second deep foobar')
+
+    def test_set(self):
+        names = class_names('foo', ('bar', set(['second', 'deep']), 'foobar'))
+        self.assertEqual(names, 'foo bar second deep foobar')
