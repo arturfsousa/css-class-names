@@ -95,3 +95,19 @@ class ClassNamesDictTestCase(TestCase):
     def test_ingnores_falsy_0(self):
         names = class_names('foo', {'bar': 0})
         self.assertEqual(names, 'foo')
+
+    def test_expressions(self):
+        names = class_names('foo', {'bar': 1 == 2})
+        self.assertEqual(names, 'foo')
+
+
+class ClassNamesDedupeTestCase(TestCase):
+
+    def test_without_dedupe(self):
+        names = class_names('foo', 'foo', 'bar')
+        self.assertEqual(names, 'foo foo bar')
+
+    def test_with_dedupe(self):
+        args = ('foo', 'foo', 'bar', {'bar': True}, ['foo'])
+        names = class_names(*args, dedupe=True)
+        self.assertEqual(names, 'foo bar')

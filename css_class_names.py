@@ -1,26 +1,28 @@
 # coding: utf-8
 
-def _get_values(*args):
-    values = []
+def _get_values(*args, values=None, dedupe=False):
+    if values is None:
+        values = []
     for arg in args:
-        if isinstance(arg, bool):
+        if isinstance(arg, (list, tuple)):
+            values = _get_values(*arg, values=values, dedupe=dedupe)
             continue
-        elif isinstance(arg, (list, tuple)):
-            values.extend(_get_values(*arg))
-            continue
-        elif arg is None:
-            continue
-        if isinstance(arg, dict):
+        elif isinstance(arg, dict):
             dict_args = [k for k, v in arg.items() if v]
-            values.extend(_get_values(*dict_args))
+            values = _get_values(*dict_args, values=values, dedupe=dedupe)
+            continue
+        elif isinstance(arg, bool):
             continue
         elif isinstance(arg, (str, int, float)):
             value = str(arg).strip()
             if value:
-                values.append(value)
+                if dedupe and value not in values:
+                    values.append(value)
+                elif not dedupe:
+                    values.append(value)
     return values
 
 
-def class_names(*args):
-    names = _get_values(*args)
+def class_names(*args, dedupe=False):
+    names = _get_values(*args, dedupe=dedupe)
     return ' '.join(names)
