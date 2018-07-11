@@ -111,3 +111,10 @@ class ClassNamesDedupeTestCase(TestCase):
         args = ('foo', 'foo', 'bar', {'bar': True}, ['foo'])
         names = class_names(*args, dedupe=True)
         self.assertEqual(names, 'foo bar')
+
+
+class ClassNamesPrefixTestCase(TestCase):
+
+    def test_adds_prefix(self):
+        names = class_names('foo', {'bar': True}, prefix='prefix__')
+        self.assertEqual(names, 'prefix__foo prefix__bar')

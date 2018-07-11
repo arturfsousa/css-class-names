@@ -23,6 +23,8 @@ def _get_values(*args, values=None, dedupe=False):
     return values
 
 
-def class_names(*args, dedupe=False):
+def class_names(*args, dedupe=False, prefix=None):
     names = _get_values(*args, dedupe=dedupe)
+    if prefix:
+        names = map(lambda n: prefix + n, names)
     return ' '.join(names)

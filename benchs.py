@@ -4,7 +4,7 @@ import timeit
 from css_class_names import class_names
 
 if __name__ == '__main__':
-    target = "class_names('foo', {'bar': True}, [['foo', 'bar']], dedupe=True)"
+    target = "class_names('foo', {'bar': True}, [['foo', 'bar']], dedupe=True, prefix='some_')"
     duration = timeit.timeit(target, globals={"class_names": class_names})
     print('Time: {}'.format(duration))
     cProfile.run(target)
