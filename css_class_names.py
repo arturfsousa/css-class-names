@@ -15,11 +15,12 @@ def _get_values(*args, values=None, dedupe=False):
             continue
         elif isinstance(arg, (str, int, float)):
             value = str(arg).strip()
-            if value:
-                if dedupe and value not in values:
-                    values.append(value)
-                elif not dedupe:
-                    values.append(value)
+            if not value:
+                continue
+            if dedupe and value not in values:
+                values.append(value)
+            elif not dedupe:
+                values.append(value)
     return values
 
 
