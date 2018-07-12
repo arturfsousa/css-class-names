@@ -10,5 +10,8 @@ After cloning the repository, create a virtualenv and use the `Makefile` command
 make setup
 make lint 
 make test 
-make test-watch
+make watch # run tests when code changes
+make coverage
 ```
+
+Alternatively, if you have `tox`, just run `tox` to test everything.
