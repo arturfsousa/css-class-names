@@ -9,5 +9,8 @@ lint:
 test:
 	nosetests --rednose
 
-test-watch:
+watch:
 	nosetests --rednose --with-watch
+
+coverage:
+	nosetests --rednose --with-coverage
