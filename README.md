@@ -1,4 +1,4 @@
-# css-class-names
+# css-class-names [![Build Status](https://travis-ci.org/arturfsousa/css-class-names.svg?branch=master)](https://travis-ci.org/arturfsousa/css-class-names)
 
 A python script for css class names conditional generation. Inspered by the node package [classnames](https://github.com/JedWatson/classnames).
 
